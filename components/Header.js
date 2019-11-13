@@ -1,24 +1,24 @@
 import Link from 'next/link'
 import { withRouter } from 'next/router'
+const Header = ({ router: { pathname, push } }) => {
 
-const Header = ({ router: { pathname } }) => (
+  return (
   <header>
-    <Link href='/'>
-      <a className={pathname === '/' ? 'is-active' : ''}>Home</a>
+
+    <Link as='/test/prefix/' href='/'shallow> 
+      <a className={pathname === '/page/1' ? 'is-active' : ''}>Start here / </a>
     </Link>
-    <Link href='/client-only'>
-      <a className={pathname === '/client-only' ? 'is-active' : ''}>
-        Client-Only
-      </a>
+    {/* This syntax is invalid, but it is required - as the id is dynamic*/}
+    <Link as='/test/prefix/page/1' href='page/1'shallow> 
+      <a className={pathname === '/page/1' ? 'is-active' : ''}>This page works - but it resets cache / </a>
     </Link>
-    <Link href='/about'>
-      <a className={pathname === '/about' ? 'is-active' : ''}>About</a>
+    
+    <Link as="/test/prefix/page/1" href='page/1' shallow>
+      <a className={pathname === '/anotherPage' ? 'is-active' : ''}>This also resets the cache /</a>
     </Link>
-    <Link href='/offenses'>
-      <a className={pathname === '/offenses' ? 'is-active' : ''}>Offenses</a>
-    </Link>
-    <Link href='/offenses/1' shallow>
-      <a className={pathname === '/offenses' ? 'is-active' : ''}>Offense 1</a>
+
+    <Link as="/test/prefix/page/1" href='page/[id]' shallow>
+      <a className={pathname === '/anotherPage' ? 'is-active' : ''}>This does not work, check errors /</a>
     </Link>
     <style jsx>{`
       header {
@@ -34,6 +34,6 @@ const Header = ({ router: { pathname } }) => (
       }
     `}</style>
   </header>
-)
+)}
 
 export default withRouter(Header)
