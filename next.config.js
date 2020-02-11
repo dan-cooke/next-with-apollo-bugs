@@ -1,3 +1,5 @@
 module.exports = {
-    assetPrefix: '/test/prefix'
+    experimental: {
+        basePath: '/test/prefix',
+    }
 }

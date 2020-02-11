@@ -24,7 +24,7 @@ const router = express.Router();
 
 router.get('/_next/*', handler);
 router.get('*', handler);
-server.use(ASSET_PREFIX, router);
+// server.use(ASSET_PREFIX, router);
 
 /**
  * @exports Promise - this promise resolves to an instance of the server, with prepared NextJS app
